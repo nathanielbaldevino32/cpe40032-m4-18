@@ -78,6 +78,22 @@ function PlayState:update(dt)
         love.event.quit()
     end
 
+    --game pause option
+    if self.paused then
+        if love.keyboard.wasPressed('space') then
+            self.paused = false
+            love.audio.resume()
+            scrolling = true
+        else
+            return
+        end
+    elseif love.keyboard.wasPressed('space') then
+        self.paused = true
+        scrolling = false
+        love.audio.pause()
+        return
+    end
+
     -- go back to start if time runs out
     if self.timer <= 0 then
         -- clear timers from prior PlayStates
@@ -319,4 +335,17 @@ function PlayState:render()
         love.graphics.printf('+ ' .. tostring(self.seconds) .. ' s', 82, self.secondsY, 182, 'center')
         love.graphics.setColor(99, 155, 255, 255)
     end
+
+ -- pause text, if paused
+    if self.paused then
+        love.graphics.setFont(gFonts['large'])
+        love.graphics.printf("PAUSED", 0, VIRTUAL_HEIGHT / 2 - 16, VIRTUAL_WIDTH, 'center')
+    end
+
+     -- pause text, if paused
+     if self.paused then
+        love.graphics.setFont(gFonts['large'])
+        love.graphics.printf("PAUSED", 0, VIRTUAL_HEIGHT / 2 - 16, VIRTUAL_WIDTH, 'center')
+    end
+
 end

@@ -74,6 +74,9 @@ function love.load()
 
     -- initialize input table
     love.keyboard.keysPressed = {}
+
+    scrolling = true 
+    
 end
 
 function love.resize(w, h)
